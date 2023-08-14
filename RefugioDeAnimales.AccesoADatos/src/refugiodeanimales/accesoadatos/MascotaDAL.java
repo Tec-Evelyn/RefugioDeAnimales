@@ -259,7 +259,7 @@ public class MascotaDAL {
         catch (SQLException ex) {
             throw ex;
         }
-        +-
+        
         return mascotas;
     }
     
