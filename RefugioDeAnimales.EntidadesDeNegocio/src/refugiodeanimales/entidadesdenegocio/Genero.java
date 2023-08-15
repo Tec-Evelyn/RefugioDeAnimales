@@ -33,7 +33,11 @@ public class Genero {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> fd0741b24cfee43c4072ac3f9e5e1f67c73318d1
     public int getTop_aux() {
         return top_aux;
     }
@@ -41,7 +45,11 @@ public class Genero {
     public void setTop_aux(int top_aux) {
         this.top_aux = top_aux;
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> fd0741b24cfee43c4072ac3f9e5e1f67c73318d1
     public ArrayList<Mascota> getMascotas() {
         return mascotas;
     }
