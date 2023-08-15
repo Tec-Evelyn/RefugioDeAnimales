@@ -50,5 +50,4 @@ public class Genero {
         this.mascotas = mascotas;
     }
     
-    
 }

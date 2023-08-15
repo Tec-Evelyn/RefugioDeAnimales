@@ -4,7 +4,8 @@ import java.util.*;
 import java.sql.*;
 import refugiodeanimales.entidadesdenegocio.*;
 
-public class GeneroDAL {
+public class GeneroDAL { 
+
     static String obtenerCampos() {
         return "g.Id, g.Nombre ";
     }
@@ -183,4 +184,5 @@ public class GeneroDAL {
         }
         return generos; 
     }
+
 }
