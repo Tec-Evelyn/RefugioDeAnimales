@@ -6,7 +6,7 @@ import refugiodeanimales.entidadesdenegocio.*;
 
 public class MascotaDAL {
     static String obtenerCampos() {
-        return "m.Id, c.idTipo, c.idGenero, c.Raza, c.Nombre, c.imagenUrl";
+        return "m.Id, m.idTipo, m.idGenero, m.Raza, m.Nombre, m.imagenUrl";
     }
     
     private static String obtenerSelect(Mascota pMascota) {
@@ -123,27 +123,49 @@ public class MascotaDAL {
         }
     }
     
-    /*private static void obtenerDatosIncluirContacto(PreparedStatement pPS, ArrayList<Empresa> pEmpresas) throws Exception {
+    private static void obtenerDatosIncluirTipo(PreparedStatement pPS, ArrayList<Mascota> pMascotas) throws Exception {
         try (ResultSet resultSet = ComunDB.obtenerResultSet(pPS);) {
-            HashMap<Integer, Contacto> contactoMap = new HashMap(); 
+            HashMap<Integer, Tipo> tipoMap = new HashMap(); 
             while (resultSet.next()) {
-                Empresa empresa = new Empresa();
-                int index = asignarDatosResultSet(empresa, resultSet, 0);
-                if (contactoMap.containsKey(empresa.getIdContacto()) == false) {
-                    Contacto contacto = new Contacto();
-                    ContactoDAL.asignarDatosResultSet(contacto, resultSet, index);
-                    contactoMap.put(contacto.getId(), contacto); 
-                    empresa.setContacto(contacto); 
+                Mascota mascota = new Mascota();
+                int index = asignarDatosResultSet(mascota, resultSet, 0);
+                if (tipoMap.containsKey(mascota.getIdTipo()) == false) {
+                    Tipo tipo = new Tipo();
+                    TipoDAL.asignarDatosResultSet(tipo, resultSet, index);
+                    tipoMap.put(tipo.getId(), tipo); 
+                    mascota.setTipo(tipo); 
                 } else {
-                    empresa.setContacto(contactoMap.get(empresa.getIdContacto())); 
+                    mascota.setTipo(tipoMap.get(mascota.getIdTipo())); 
                 }
-                pEmpresas.add(empresa); 
+                pMascotas.add(mascota); 
             }
             resultSet.close();
         } catch (SQLException ex) {
             throw ex; 
         }
-    }*/
+    }
+    
+        private static void obtenerDatosIncluirGenero(PreparedStatement pPS, ArrayList<Mascota> pMascotas) throws Exception {
+        try (ResultSet resultSet = ComunDB.obtenerResultSet(pPS);) {
+            HashMap<Integer, Genero> generoMap = new HashMap(); 
+            while (resultSet.next()) {
+                Mascota mascota = new Mascota();
+                int index = asignarDatosResultSet(mascota, resultSet, 0);
+                if (generoMap.containsKey(mascota.getIdGenero()) == false) {
+                    Genero genero = new Genero();
+                    GeneroDAL.asignarDatosResultSet(genero, resultSet, index);
+                    generoMap.put(genero.getId(), genero); 
+                    mascota.setGenero(genero); 
+                } else {
+                    mascota.setGenero(generoMap.get(mascota.getIdGenero())); 
+                }
+                pMascotas.add(mascota); 
+            }
+            resultSet.close();
+        } catch (SQLException ex) {
+            throw ex; 
+        }
+    }
     
     public static Mascota obtenerPorId(Mascota pMascota) throws Exception {
         Mascota mascota = new Mascota();
@@ -208,13 +230,6 @@ public class MascotaDAL {
                 statement.setInt(pUtilQuery.getNumWhere(), pMascota.getIdGenero());
             }
         }
-
-       /* if (pMascota.getIdContacto()> 0) {
-            pUtilQuery.AgregarNumWhere(" e.IdContacto=? ");
-            if (statement != null) {
-                statement.setInt(pUtilQuery.getNumWhere(), pEmpresa.getIdContacto());
-            }
-        }*/
          if (pMascota.getRaza() != null && pMascota.getRaza().trim().isEmpty() == false) {
             pUtilQuery.AgregarNumWhere(" m.Raza LIKE ? ");
             if (statement != null) {
@@ -263,8 +278,8 @@ public class MascotaDAL {
         return mascotas;
     }
     
-    /*public static ArrayList<Mascota> buscarIncluirContacto(Mascota pMascota) throws Exception {
-        ArrayList<Mascota> empresas = new ArrayList();
+    public static ArrayList<Mascota> buscarIncluirIdTipo(Mascota pMascota) throws Exception {
+        ArrayList<Mascota> mascotas = new ArrayList();
         try (Connection conn = ComunDB.obtenerConexion();) {
             String sql = "SELECT ";
             if (pMascota.getTop_aux() > 0 && ComunDB.TIPODB == ComunDB.TipoDB.SQLSERVER) {
@@ -272,20 +287,20 @@ public class MascotaDAL {
             }
             sql += obtenerCampos();
             sql += ",";
-            sql += ContactoDAL.obtenerCampos();
-            sql += " FROM Empresa e";
-            sql += " JOIN Contacto c on (e.IdContacto=c.Id)";
+            sql += MascotaDAL.obtenerCampos();
+            sql += " FROM Mascota m";
+            sql += " JOIN Tipo t on (m.IdTipo=t.Id)";
             ComunDB comundb = new ComunDB();
             ComunDB.utilQuery utilQuery = comundb.new utilQuery(sql, null, 0);
-            querySelect(pEmpresa, utilQuery);
+            querySelect(pMascota, utilQuery);
             sql = utilQuery.getSQL();
-            sql += agregarOrderBy(pEmpresa);
+            sql += agregarOrderBy(pMascota);
             try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                 utilQuery.setStatement(ps);
                 utilQuery.setSQL(null);
                 utilQuery.setNumWhere(0);
-                querySelect(pEmpresa, utilQuery);
-                obtenerDatosIncluirContacto(ps, empresas);
+                querySelect(pMascota, utilQuery);
+                obtenerDatosIncluirTipo(ps, mascotas);
                 ps.close();
             } catch (SQLException ex) {
                 throw ex;
@@ -294,6 +309,40 @@ public class MascotaDAL {
         } catch (SQLException ex) {
             throw ex;
         }
-        return empresas;
-    }   */
+        return mascotas;
+    }
+    
+    public static ArrayList<Mascota> buscarIncluirIdGenero(Mascota pMascota) throws Exception {
+        ArrayList<Mascota> mascotas = new ArrayList();
+        try (Connection conn = ComunDB.obtenerConexion();) {
+            String sql = "SELECT ";
+            if (pMascota.getTop_aux() > 0 && ComunDB.TIPODB == ComunDB.TipoDB.SQLSERVER) {
+                sql += "TOP " + pMascota.getTop_aux() + " "; 
+            }
+            sql += obtenerCampos();
+            sql += ",";
+            sql += MascotaDAL.obtenerCampos();
+            sql += " FROM Mascota m";
+            sql += " JOIN Genero g on (m.IdGenero=g.Id)";
+            ComunDB comundb = new ComunDB();
+            ComunDB.utilQuery utilQuery = comundb.new utilQuery(sql, null, 0);
+            querySelect(pMascota, utilQuery);
+            sql = utilQuery.getSQL();
+            sql += agregarOrderBy(pMascota);
+            try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
+                utilQuery.setStatement(ps);
+                utilQuery.setSQL(null);
+                utilQuery.setNumWhere(0);
+                querySelect(pMascota, utilQuery);
+                obtenerDatosIncluirGenero(ps, mascotas);
+                ps.close();
+            } catch (SQLException ex) {
+                throw ex;
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            throw ex;
+        }
+        return mascotas;
+    }      
 }
