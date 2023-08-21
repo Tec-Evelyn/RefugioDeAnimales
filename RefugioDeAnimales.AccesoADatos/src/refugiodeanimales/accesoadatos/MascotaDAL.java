@@ -6,7 +6,7 @@ import refugiodeanimales.entidadesdenegocio.*;
 
 public class MascotaDAL {
     static String obtenerCampos() {
-        return "m.Id, m.idTipo, m.idGenero, m.Raza, m.Nombre, m.imagenUrl";
+        return "m.Id, m.IdTipo, m.IdGenero, m.Raza, m.Nombre, m.ImagenUrl";
     }
     
     private static String obtenerSelect(Mascota pMascota) {
@@ -20,7 +20,7 @@ public class MascotaDAL {
     }
     
     private static String agregarOrderBy(Mascota pMascota) {
-        String sql = " ORDER BY c.Id DESC";
+        String sql = " ORDER BY m.Id DESC";
         if (pMascota.getTop_aux() > 0 && ComunDB.TIPODB == ComunDB.TipoDB.MYSQL) {
             sql += " LIMIT " + pMascota.getTop_aux() + " ";
         }
@@ -31,7 +31,7 @@ public class MascotaDAL {
         int result;
         String sql;
         try (Connection conn = ComunDB.obtenerConexion();) { 
-            sql = "INSERT INTO Mascota(idTipo, idGenero, Raza, Nombre, imagenUrl) VALUES(?, ?, ?, ?, ?)";
+            sql = "INSERT INTO Mascota(IdTipo, IdGenero, Raza, Nombre, ImagenUrl) VALUES(?, ?, ?, ?, ?)";
             try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                 ps.setInt(1, pMascota.getIdTipo());
                 ps.setInt(2, pMascota.getIdGenero());
@@ -172,7 +172,7 @@ public class MascotaDAL {
         ArrayList<Mascota> mascotas = new ArrayList();
         try (Connection conn = ComunDB.obtenerConexion();) {
             String sql = obtenerSelect(pMascota);
-            sql += " WHERE e.Id=?";
+            sql += " WHERE m.Id=?";
             try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                 ps.setInt(1, pMascota.getId());
                 obtenerDatos(ps, mascotas);
