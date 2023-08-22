@@ -2,7 +2,6 @@ package refugiodeanimales.accesoadatos;
 
 import java.util.*;
 import java.sql.*;
-import java.time.LocalDate;
 import refugiodeanimales.entidadesdenegocio.*;
 
 public class UsuarioDAL {
@@ -23,7 +22,7 @@ public class UsuarioDAL {
     }
     
     static String obtenerCampos() {
-        return "u.Id, u.IdRol, u.Nombre, u.Apellido, u.Login, u.Telefono, u.Direccion";
+        return "u.Id, u.IdRol, u.Nombre, u.Apellido, u.Login, u.Estatus, u.Telefono, u.Direccion";
     }
     
     private static String obtenerSelect(Usuario pUsuario) {
@@ -78,15 +77,16 @@ public class UsuarioDAL {
         boolean existe = existeLogin(pUsuario);
         if (existe == false) {
             try (Connection conn = ComunDB.obtenerConexion();) {
-                sql = "INSERT INTO Usuario(IdRol,Nombre,Apellido,Login,Pass,Telefono,Direccion) VALUES(?,?,?,?,?,?,?)";
+                sql = "INSERT INTO Usuario(IdRol,Nombre,Apellido,Login,Pass,Estatus,Telefono,Direccion) VALUES(?,?,?,?,?,?,?,?)";
                 try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                     ps.setInt(1, pUsuario.getIdRol());
                     ps.setString(2, pUsuario.getNombre());
                     ps.setString(3, pUsuario.getApellido()); 
                     ps.setString(4, pUsuario.getLogin());
-                    ps.setString(5, encriptarMD5(pUsuario.getPassword())); 
-                    ps.setString(6, pUsuario.getTelefono());
-                    ps.setString(7, pUsuario.getDireccion());
+                    ps.setString(5, encriptarMD5(pUsuario.getPassword()));
+                    ps.setByte(6, pUsuario.getEstatus());
+                    ps.setString(7, pUsuario.getTelefono());
+                    ps.setString(8, pUsuario.getDireccion());
                     result = ps.executeUpdate();
                     ps.close();
                 } catch (SQLException ex) {
@@ -110,15 +110,16 @@ public class UsuarioDAL {
         boolean existe = existeLogin(pUsuario);
         if (existe == false) {
             try (Connection conn = ComunDB.obtenerConexion();) {                
-                sql = "UPDATE Usuario SET IdRol=?, Nombre=?, Apellido=?, Login=?, Telefono=? Direccion=? WHERE Id=?";
+                sql = "UPDATE Usuario SET IdRol=?, Nombre=?, Apellido=?, Login=?, Estatus=?, Telefono=? Direccion=? WHERE Id=?";
                 try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                     ps.setInt(1, pUsuario.getIdRol());
                     ps.setString(2, pUsuario.getNombre());  
                     ps.setString(3, pUsuario.getApellido());
                     ps.setString(4, pUsuario.getLogin());
-                    ps.setString(5, pUsuario.getTelefono());
-                    ps.setString(6, pUsuario.getDireccion());
-                    ps.setInt(7, pUsuario.getId());
+                    ps.setByte(5, pUsuario.getEstatus());
+                    ps.setString(6, pUsuario.getTelefono());
+                    ps.setString(7, pUsuario.getDireccion());
+                    ps.setInt(8, pUsuario.getId());
                     result = ps.executeUpdate();
                     ps.close();
                 } catch (SQLException ex) {
@@ -167,6 +168,8 @@ public class UsuarioDAL {
         pUsuario.setApellido(pResultSet.getString(pIndex)); 
         pIndex++;
         pUsuario.setLogin(pResultSet.getString(pIndex)); 
+        pIndex++;
+        pUsuario.setEstatus(pResultSet.getByte(pIndex)); 
         pIndex++;
         pUsuario.setTelefono(pResultSet.getString(pIndex)); 
         pIndex++;
@@ -289,6 +292,13 @@ public class UsuarioDAL {
                 statement.setString(pUtilQuery.getNumWhere(), pUsuario.getLogin());
             }
         }
+        
+        if (pUsuario.getEstatus() > 0) {
+            pUtilQuery.AgregarNumWhere(" u.Estatus=? ");
+            if (statement != null) {
+                statement.setInt(pUtilQuery.getNumWhere(), pUsuario.getEstatus());
+            }
+        }
 
         if (pUsuario.getTelefono() != null && pUsuario.getTelefono().trim().isEmpty() == false) {
             pUtilQuery.AgregarNumWhere(" u.Telefono LIKE ? ");
@@ -338,10 +348,11 @@ public class UsuarioDAL {
         String password = encriptarMD5(pUsuario.getPassword());
         try (Connection conn = ComunDB.obtenerConexion();) {
             String sql = obtenerSelect(pUsuario);
-            sql += " WHERE u.Login=? AND u.Password=? ";
+            sql += " WHERE u.Login=? AND u.Password=? AND u.Estatus=?";
             try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                 ps.setString(1, pUsuario.getLogin());
                 ps.setString(2, password);
+                ps.setByte(3, Usuario.EstatusUsuario.ACTIVO);
                 obtenerDatos(ps, usuarios);
                 ps.close();
             } catch (SQLException ex) {
