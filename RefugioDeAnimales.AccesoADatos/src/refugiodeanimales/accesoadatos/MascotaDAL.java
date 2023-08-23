@@ -345,4 +345,16 @@ public class MascotaDAL {
         }
         return mascotas;
     }      
+
+    public static ArrayList<Mascota> buscarIncluirContacto(Mascota mascota) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public static ArrayList<Mascota> buscarIncluirTipo(Mascota mascota) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public static ArrayList<Mascota> buscarIncluirGenero(Mascota mascota) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
