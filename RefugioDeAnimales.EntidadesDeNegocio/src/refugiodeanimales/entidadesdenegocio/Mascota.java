@@ -9,6 +9,7 @@ public class Mascota {
     private String raza;
     private String nombre;
     private String imagenurl;
+    private byte estatus;
     private int top_aux;
     private Tipo tipo;
     private Genero genero;
@@ -16,13 +17,14 @@ public class Mascota {
     public Mascota() {
     }
 
-    public Mascota(int id, int idTipo, int idGenero, String raza, String nombre, String imagenurl, int top_aux, Tipo tipo, Genero genero, ArrayList<Tipo> tipos) {
+    public Mascota(int id, int idTipo, int idGenero, String raza, String nombre, String imagenurl, byte estatus, int top_aux, Tipo tipo, Genero genero) {
         this.id = id;
         this.idTipo = idTipo;
         this.idGenero = idGenero;
         this.raza = raza;
         this.nombre = nombre;
         this.imagenurl = imagenurl;
+        this.estatus = estatus;
         this.top_aux = top_aux;
         this.tipo = tipo;
         this.genero = genero;
@@ -76,6 +78,14 @@ public class Mascota {
         this.imagenurl = imagenurl;
     }
 
+    public byte getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(byte estatus) {
+        this.estatus = estatus;
+    }
+
     public int getTop_aux() {
         return top_aux;
     }
@@ -99,6 +109,9 @@ public class Mascota {
     public void setGenero(Genero genero) {
         this.genero = genero;
     }
-        
-    
+
+    public class EstatusMascota {
+        public static final byte ACTIVO = 1;
+        public static final byte INACTIVO = 2;
+    } 
 }

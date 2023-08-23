@@ -5,8 +5,9 @@ import java.sql.*;
 import refugiodeanimales.entidadesdenegocio.*;
 
 public class MascotaDAL {
+    
     static String obtenerCampos() {
-        return "m.Id, m.IdTipo, m.IdGenero, m.Raza, m.Nombre, m.ImagenUrl";
+        return "m.Id, m.IdTipo, m.IdGenero, m.Raza, m.Nombre, m.ImagenUrl, m.Estatus";
     }
     
     private static String obtenerSelect(Mascota pMascota) {
@@ -31,13 +32,14 @@ public class MascotaDAL {
         int result;
         String sql;
         try (Connection conn = ComunDB.obtenerConexion();) { 
-            sql = "INSERT INTO Mascota(IdTipo, IdGenero, Raza, Nombre, ImagenUrl) VALUES(?, ?, ?, ?, ?)";
+            sql = "INSERT INTO Mascota(IdTipo, IdGenero, Raza, Nombre, ImagenUrl, Estatus) VALUES(?, ?, ?, ?, ?, ?)";
             try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                 ps.setInt(1, pMascota.getIdTipo());
                 ps.setInt(2, pMascota.getIdGenero());
                 ps.setString(3, pMascota.getRaza());
                 ps.setString(4, pMascota.getNombre());
                 ps.setString(5, pMascota.getImagenurl());
+                ps.setByte(6, pMascota.getEstatus());
                 result = ps.executeUpdate();
                 ps.close();
             } catch (SQLException ex) {
@@ -54,14 +56,15 @@ public class MascotaDAL {
         int result;
         String sql;
         try (Connection conn = ComunDB.obtenerConexion();) {
-            sql = "UPDATE Mascota SET IdTipo=?, IdGenero = ?, Raza = ?, Nombre = ?, ImagenUrl = ?, WHERE Id=?";
+            sql = "UPDATE Mascota SET IdTipo=?, IdGenero = ?, Raza = ?, Nombre = ?, ImagenUrl = ?, Estatus = ?, WHERE Id=?";
             try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                 ps.setInt(1, pMascota.getIdTipo());
                 ps.setInt(2, pMascota.getIdGenero());
                 ps.setString(3, pMascota.getRaza());
                 ps.setString(4, pMascota.getNombre());
                 ps.setString(5, pMascota.getImagenurl());
-                ps.setInt(6, pMascota.getId());
+                ps.setByte(6, pMascota.getEstatus());
+                ps.setInt(7, pMascota.getId());
                 result = ps.executeUpdate();
                 ps.close();
             } catch (SQLException ex) {
@@ -106,7 +109,8 @@ public class MascotaDAL {
         pMascota.setNombre(pResultSet.getString(pIndex));
         pIndex++;
         pMascota.setImagenurl(pResultSet.getString(pIndex));
-       
+        pIndex++;
+        pMascota.setEstatus(pResultSet.getByte(pIndex));    
         return pIndex;
     }
     
@@ -123,9 +127,10 @@ public class MascotaDAL {
         }
     }
     
-    private static void obtenerDatosIncluirTipo(PreparedStatement pPS, ArrayList<Mascota> pMascotas) throws Exception {
+    private static void obtenerDatosIncluirRelaciones(PreparedStatement pPS, ArrayList<Mascota> pMascotas) throws Exception {
         try (ResultSet resultSet = ComunDB.obtenerResultSet(pPS);) {
             HashMap<Integer, Tipo> tipoMap = new HashMap(); 
+            HashMap<Integer, Genero> generoMap = new HashMap(); 
             while (resultSet.next()) {
                 Mascota mascota = new Mascota();
                 int index = asignarDatosResultSet(mascota, resultSet, 0);
@@ -137,20 +142,7 @@ public class MascotaDAL {
                 } else {
                     mascota.setTipo(tipoMap.get(mascota.getIdTipo())); 
                 }
-                pMascotas.add(mascota); 
-            }
-            resultSet.close();
-        } catch (SQLException ex) {
-            throw ex; 
-        }
-    }
-    
-        private static void obtenerDatosIncluirGenero(PreparedStatement pPS, ArrayList<Mascota> pMascotas) throws Exception {
-        try (ResultSet resultSet = ComunDB.obtenerResultSet(pPS);) {
-            HashMap<Integer, Genero> generoMap = new HashMap(); 
-            while (resultSet.next()) {
-                Mascota mascota = new Mascota();
-                int index = asignarDatosResultSet(mascota, resultSet, 0);
+                
                 if (generoMap.containsKey(mascota.getIdGenero()) == false) {
                     Genero genero = new Genero();
                     GeneroDAL.asignarDatosResultSet(genero, resultSet, index);
@@ -158,7 +150,8 @@ public class MascotaDAL {
                     mascota.setGenero(genero); 
                 } else {
                     mascota.setGenero(generoMap.get(mascota.getIdGenero())); 
-                }
+                } 
+                
                 pMascotas.add(mascota); 
             }
             resultSet.close();
@@ -248,6 +241,12 @@ public class MascotaDAL {
                 statement.setString(pUtilQuery.getNumWhere(), "%" + pMascota.getNombre() + "%");
             }
         }
+        if (pMascota.getEstatus() > 0) {
+            pUtilQuery.AgregarNumWhere(" m.Estatus=? ");
+            if (statement != null) {
+                statement.setInt(pUtilQuery.getNumWhere(), pMascota.getEstatus());
+            }
+        }        
     }
     
     public static ArrayList<Mascota> buscar(Mascota pMascota) throws Exception {
@@ -273,12 +272,11 @@ public class MascotaDAL {
         } 
         catch (SQLException ex) {
             throw ex;
-        }
-        
+        }        
         return mascotas;
     }
     
-    public static ArrayList<Mascota> buscarIncluirIdTipo(Mascota pMascota) throws Exception {
+    public static ArrayList<Mascota> buscarIncluirIdRelaciones(Mascota pMascota) throws Exception {
         ArrayList<Mascota> mascotas = new ArrayList();
         try (Connection conn = ComunDB.obtenerConexion();) {
             String sql = "SELECT ";
@@ -287,9 +285,12 @@ public class MascotaDAL {
             }
             sql += obtenerCampos();
             sql += ",";
-            sql += MascotaDAL.obtenerCampos();
-            sql += " FROM Mascota m";
-            sql += " JOIN Tipo t on (m.IdTipo=t.Id)";
+            sql += TipoDAL.obtenerCampos();
+            sql += ",";
+            sql += GeneroDAL.obtenerCampos();
+            sql += "FROM Mascota m";
+            sql += "INNER JOIN Tipo t on(m.IdTipo = t.Id)";
+            sql += "INNER JOIN Genero g on(m.IdGenero = g.Id)";
             ComunDB comundb = new ComunDB();
             ComunDB.utilQuery utilQuery = comundb.new utilQuery(sql, null, 0);
             querySelect(pMascota, utilQuery);
@@ -300,7 +301,7 @@ public class MascotaDAL {
                 utilQuery.setSQL(null);
                 utilQuery.setNumWhere(0);
                 querySelect(pMascota, utilQuery);
-                obtenerDatosIncluirTipo(ps, mascotas);
+                obtenerDatosIncluirRelaciones(ps, mascotas);
                 ps.close();
             } catch (SQLException ex) {
                 throw ex;
@@ -311,50 +312,8 @@ public class MascotaDAL {
         }
         return mascotas;
     }
-    
-    public static ArrayList<Mascota> buscarIncluirIdGenero(Mascota pMascota) throws Exception {
-        ArrayList<Mascota> mascotas = new ArrayList();
-        try (Connection conn = ComunDB.obtenerConexion();) {
-            String sql = "SELECT ";
-            if (pMascota.getTop_aux() > 0 && ComunDB.TIPODB == ComunDB.TipoDB.SQLSERVER) {
-                sql += "TOP " + pMascota.getTop_aux() + " "; 
-            }
-            sql += obtenerCampos();
-            sql += ",";
-            sql += MascotaDAL.obtenerCampos();
-            sql += " FROM Mascota m";
-            sql += " JOIN Genero g on (m.IdGenero=g.Id)";
-            ComunDB comundb = new ComunDB();
-            ComunDB.utilQuery utilQuery = comundb.new utilQuery(sql, null, 0);
-            querySelect(pMascota, utilQuery);
-            sql = utilQuery.getSQL();
-            sql += agregarOrderBy(pMascota);
-            try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
-                utilQuery.setStatement(ps);
-                utilQuery.setSQL(null);
-                utilQuery.setNumWhere(0);
-                querySelect(pMascota, utilQuery);
-                obtenerDatosIncluirGenero(ps, mascotas);
-                ps.close();
-            } catch (SQLException ex) {
-                throw ex;
-            }
-            conn.close();
-        } catch (SQLException ex) {
-            throw ex;
-        }
-        return mascotas;
-    }      
 
-    public static ArrayList<Mascota> buscarIncluirContacto(Mascota mascota) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public static ArrayList<Mascota> buscarIncluirTipo(Mascota mascota) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public static ArrayList<Mascota> buscarIncluirGenero(Mascota mascota) {
+    public static ArrayList<Mascota> buscarIncluirRelaciones(Mascota mascota) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
