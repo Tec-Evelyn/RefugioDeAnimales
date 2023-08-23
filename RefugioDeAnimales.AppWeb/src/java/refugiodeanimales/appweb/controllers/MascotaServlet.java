@@ -86,7 +86,7 @@ public class MascotaServlet extends HttpServlet {
     }
 
     private void doGetRequestCreate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("Views/Empresa/create.jsp").forward(request, response);
+        request.getRequestDispatcher("Views/Mascota/create.jsp").forward(request, response);
     }
 
     private void doPostRequestCreate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
