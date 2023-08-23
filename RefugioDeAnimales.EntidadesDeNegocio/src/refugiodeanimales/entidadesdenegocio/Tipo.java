@@ -5,17 +5,17 @@ import java.util.ArrayList;
 public class Tipo {
   private int id;
   private String nombre;
-  private byte estatus;
+//  private byte estatus;
   private int top_aux;
   private ArrayList<Mascota> mascotas;
 
     public Tipo() {
     }
 
-    public Tipo(int id, String nombre, byte estatus, int top_aux, ArrayList<Mascota> mascotas) {
+    public Tipo(int id, String nombre, int top_aux, ArrayList<Mascota> mascotas) {
         this.id = id;
         this.nombre = nombre;
-        this.estatus = estatus;
+//        this.estatus = estatus;
         this.top_aux = top_aux;
         this.mascotas = mascotas;
     }
@@ -36,13 +36,13 @@ public class Tipo {
         this.nombre = nombre;
     }
 
-    public byte getEstatus() {
-        return estatus;
-    }
-
-    public void setEstatus(byte estatus) {
-        this.estatus = estatus;
-    }
+//    public byte getEstatus() {
+//        return estatus;
+//    }
+//
+//    public void setEstatus(byte estatus) {
+//        this.estatus = estatus;
+//    }
 
     public int getTop_aux() {
         return top_aux;

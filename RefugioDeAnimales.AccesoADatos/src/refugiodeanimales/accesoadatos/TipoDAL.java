@@ -6,7 +6,7 @@ import refugiodeanimales.entidadesdenegocio.*;
 
 public class TipoDAL {
     static String obtenerCampos() {
-        return "t.Id, t.Nombre, t.Estatus";
+        return "t.Id, t.Nombre";
     }
     
     private static String obtenerSelect(Tipo pTipo) {
@@ -31,10 +31,10 @@ public class TipoDAL {
         int result;
         String sql;
         try (Connection conn = ComunDB.obtenerConexion();) { 
-            sql = "INSERT INTO Tipo(Nombre, Estatus) VALUES(?, ?)";
+            sql = "INSERT INTO Tipo(Nombre) VALUES(?)";
             try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                 ps.setString(1, pTipo.getNombre());
-                ps.setByte(2, pTipo.getEstatus());
+//                ps.setByte(2, pTipo.getEstatus());
                 result = ps.executeUpdate();
                 ps.close();
             } catch (SQLException ex) {
@@ -51,10 +51,10 @@ public class TipoDAL {
         int result;
         String sql;
         try (Connection conn = ComunDB.obtenerConexion();) {
-            sql = "UPDATE Tipo SET Nombre=?, Estatus=? WHERE Id=?";
+            sql = "UPDATE Tipo SET Nombre=? WHERE Id=?";
             try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                 ps.setString(1, pTipo.getNombre());
-                ps.setByte(2, pTipo.getEstatus());
+//                ps.setByte(2, pTipo.getEstatus());
                 ps.setInt(3, pTipo.getId());
                 result = ps.executeUpdate();
                 ps.close();
@@ -92,9 +92,9 @@ public class TipoDAL {
         pTipo.setId(pResultSet.getInt(pIndex));
         pIndex++;
         pTipo.setNombre(pResultSet.getString(pIndex));
-        pIndex++;
-        pTipo.setEstatus(pResultSet.getByte(pIndex)); 
         return pIndex;
+//        pTipo.setEstatus(pResultSet.getByte(pIndex)); 
+//        return pIndex;
     }
     
     private static void obtenerDatos(PreparedStatement pPS, ArrayList<Tipo> pTipos) throws Exception {
@@ -172,12 +172,12 @@ public class TipoDAL {
             }
         }
         
-        if (pTipo.getEstatus() > 0) {
-            pUtilQuery.AgregarNumWhere(" t.Estatus=? ");
-            if (statement != null) {
-                statement.setInt(pUtilQuery.getNumWhere(), pTipo.getEstatus());
-            }
-        }
+//        if (pTipo.getEstatus() > 0) {
+//            pUtilQuery.AgregarNumWhere(" t.Estatus=? ");
+//            if (statement != null) {
+//                statement.setInt(pUtilQuery.getNumWhere(), pTipo.getEstatus());
+//            }
+//        }
     }
     
     public static ArrayList<Tipo> buscar(Tipo pTipo) throws Exception {

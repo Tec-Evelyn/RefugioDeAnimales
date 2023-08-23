@@ -24,7 +24,7 @@ public class TipoServlet extends HttpServlet {
         }
 
         tipo.setNombre(Utilidad.getParameter(request, "nombre", ""));
-        tipo.setEstatus(Byte.parseByte(Utilidad.getParameter(request," estatus", "")));
+//        tipo.setEstatus(Byte.parseByte(Utilidad.getParameter(request," estatus", "")));
         //tipo.setEstatus(Utilidad.getParameter(request, "estatus", ""));
         //tipo.setCelular(Utilidad.getParameter(request, "celular", ""));
         
