@@ -11,8 +11,8 @@ public class ComunDB {
     
     static String connectionUrlSqlServer = "jdbc:sqlserver://localhost;"
             + "database=RefugioDeAnimales;"
-            + "user=Java;"
-            + "password=#Modulo16;"
+            + "user=JavaLiquez;"
+            + "password=#19Eve23;"
             + "loginTimeout=30;encrypt=false;trustServerCertificate=false";
     
     public static Connection obtenerConexion() throws SQLException {
