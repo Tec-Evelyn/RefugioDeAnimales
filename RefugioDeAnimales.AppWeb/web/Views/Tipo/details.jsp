@@ -7,7 +7,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <jsp:include page="/Views/Shared/title.jsp" />
-        <title>Detalles del Contacto</title>
+        <title>Detalles del Tipo</title>
     </head>
     <body>
         <jsp:include page="/Views/Shared/headerBody.jsp" />  
@@ -16,7 +16,7 @@
             <div class="row">
                 
                 <div class="input-field col l4 s12">
-                    <input disabled  id="txtNombre" type="text" value="<%=contacto.getNombre()%>">
+                    <input disabled  id="txtNombre" type="text" value="<%=tipo.getNombre()%>">
                     <label for="txtNombre">Nombre</label>
                 </div>                                     
             </div>

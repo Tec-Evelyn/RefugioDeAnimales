@@ -55,7 +55,7 @@ public class TipoDAL {
             try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                 ps.setString(1, pTipo.getNombre());
 //                ps.setByte(2, pTipo.getEstatus());
-                ps.setInt(3, pTipo.getId());
+                ps.setInt(2, pTipo.getId());
                 result = ps.executeUpdate();
                 ps.close();
             } catch (SQLException ex) {
