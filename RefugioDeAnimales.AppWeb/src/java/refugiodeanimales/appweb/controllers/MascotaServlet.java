@@ -30,6 +30,7 @@ public class MascotaServlet extends HttpServlet {
         mascota.setImagenurl(Utilidad.getParameter(request, "imagenurl", ""));
         mascota.setIdTipo(Integer.parseInt(Utilidad.getParameter(request, "IdTipo", "0")));
         mascota.setIdGenero(Integer.parseInt(Utilidad.getParameter(request, "idGenero", "0")));
+        mascota.setEstatus(Byte.parseByte(Utilidad.getParameter(request, "estatus", "0")));
         
         if (accion.equals("index")) {
             mascota.setTop_aux(Integer.parseInt(Utilidad.getParameter(request, "top_aux", "10")));
@@ -43,18 +44,7 @@ public class MascotaServlet extends HttpServlet {
         try {
             Mascota mascota = new Mascota();
             mascota.setTop_aux(10);
-            ArrayList<Mascota> mascotas = MascotaDAL.buscarIncluirTipo(mascota);
-            request.setAttribute("mascotas", mascotas);
-            request.setAttribute("top_aux", mascota.getTop_aux());
-            request.getRequestDispatcher("Views/Mascota/index.jsp").forward(request, response);
-        } catch (Exception ex) {
-            Utilidad.enviarError(ex.getMessage(), request, response);
-        }
-        
-        try {
-            Mascota mascota = new Mascota();
-            mascota.setTop_aux(10);
-            ArrayList<Mascota> mascotas = MascotaDAL.buscarIncluirGenero(mascota);
+            ArrayList<Mascota> mascotas = MascotaDAL.buscarIncluirRelaciones(mascota);
             request.setAttribute("mascotas", mascotas);
             request.setAttribute("top_aux", mascota.getTop_aux());
             request.getRequestDispatcher("Views/Mascota/index.jsp").forward(request, response);
@@ -66,23 +56,13 @@ public class MascotaServlet extends HttpServlet {
     private void doPostRequestIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             Mascota mascota = obtenerMascota(request);
-            ArrayList<Mascota> mascotas = MascotaDAL.buscarIncluirTipo(mascota);
+            ArrayList<Mascota> mascotas = MascotaDAL.buscarIncluirRelaciones(mascota);
             request.setAttribute("mascotas", mascotas);
             request.setAttribute("top_aux", mascota.getTop_aux());
             request.getRequestDispatcher("Views/Mascota/index.jsp").forward(request, response);
         } catch (Exception ex) {
             Utilidad.enviarError(ex.getMessage(), request, response);
-        }
-        
-        try {
-            Mascota mascota = obtenerMascota(request);
-            ArrayList<Mascota> mascotas = MascotaDAL.buscarIncluirGenero(mascota);
-            request.setAttribute("mascotas", mascotas);
-            request.setAttribute("top_aux", mascota.getTop_aux());
-            request.getRequestDispatcher("Views/Mascota/index.jsp").forward(request, response);
-        } catch (Exception ex) {
-            Utilidad.enviarError(ex.getMessage(), request, response);
-        }        
+        }       
     }
 
     private void doGetRequestCreate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -114,29 +94,18 @@ public class MascotaServlet extends HttpServlet {
                 tipo.setId(mascota_result.getIdTipo());
                 mascota_result.setTipo(TipoDAL.obtenerPorId(tipo));
                 request.setAttribute("mascota", mascota_result);
-            } else {
-                Utilidad.enviarError("El Id:" + mascota_result.getId() + " no existe en la tabla de Mascotas", request, response);
-            }
-            
-        } catch (Exception ex) {
-            Utilidad.enviarError(ex.getMessage(), request, response);
-        }
-        
-        try {
-            Mascota mascota = obtenerMascota(request);
-            Mascota mascota_result = MascotaDAL.obtenerPorId(mascota);
-            if (mascota_result.getId() > 0) {
                 Genero genero = new Genero();
                 genero.setId(mascota_result.getIdGenero());
                 mascota_result.setGenero(GeneroDAL.obtenerPorId(genero));
+                
                 request.setAttribute("mascota", mascota_result);
             } else {
-                Utilidad.enviarError("El Id:" + mascota_result.getId() + " no existe en la tabla de Mascotas", request, response);
+                Utilidad.enviarError("El Id:" + mascota_result.getId() + " no existe en la tabla de Mascota", request, response);
             }
             
         } catch (Exception ex) {
             Utilidad.enviarError(ex.getMessage(), request, response);
-        }        
+        }       
     }
 
     private void doGetRequestEdit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
