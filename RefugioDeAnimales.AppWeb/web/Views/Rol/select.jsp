@@ -1,11 +1,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<%@page import="refugiodeanimales.entidadesdenegocio.Rol"%>
+<%@page import="refugiodeanimales.accesoadatos.RolDAL"%>
+<%@page import="java.util.ArrayList"%>
+
+<% ArrayList<Rol> roles = RolDAL.obtenerTodos();
+    int id = Integer.parseInt(request.getParameter("id"));
+%>
+<select id="slRol" name="idRol">
+    <option <%=(id == 0) ? "selected" : ""%>  value="0">SELECCIONAR</option>
+    <% for (Rol rol : roles) {%>
+    <option <%=(id == rol.getId()) ? "selected" : ""%>  value="<%=rol.getId()%>"><%= rol.getNombre()%></option>
+    <%}%>
+</select>
+<label for="idRol">Rol</label>
