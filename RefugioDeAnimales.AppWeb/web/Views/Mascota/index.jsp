@@ -1,7 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="refugiodeanimales.entidadesdenegocio.Mascota"%>
+<%@page import="controlproductos.entidadesdenegocio.*"%>
 <%@page import="java.util.ArrayList"%>
-
 
 <% ArrayList<Mascota> mascotas = (ArrayList<Mascota>) request.getAttribute("mascotas");
     int numPage = 1;
@@ -33,26 +32,29 @@
             <form action="Mascota" method="post">
                 <input type="hidden" name="accion" value="<%=request.getAttribute("accion")%>"> 
                 <div class="row">
-                     
-                    
-                    
-                    <div class="input-field col l4 s12">
-                        <input  id="txtRaza" type="text" name="raza" >
-                        <label for="txtRaza">Raza</label>
-                    </div>
                     <div class="input-field col l4 s12">
                         <input  id="txtNombre" type="text" name="nombre" >
                         <label for="txtNombre">Nombre</label>
-                    </div>                       
-                      
-                     <div class="input-field col l4 s12">   
-                        <select id="slEstatus" name="estatus">
-                            <option value="0">SELECCIONAR</option>
-                            <option value="<%=Mascota.EstatusMascota.ACTIVO%>">ACTIVO</option>
-                            <option value="<%=Mascota.EstatusMascota.INACTIVO%>">INACTIVO</option>
-                        </select>       
-                        <label for="slEstatus">Estatus</label>
+                    </div>     
+                    
+                      <div class="input-field col l4 s12">
+                        <input  id="txtRaza" type="number" name="raza" >
+                        <label for="txtRaza"></label>
                     </div>
+                     <div class="input-field col l4 s12">
+                        <input  id="txtNombre" type="number" name="nombre" >
+                        <label for="txtNombre">Nombre</label>
+                    </div>
+                      <div class="input-field col l4 s12">
+                        <input  id="txtImagenUrl" name="imagenurl" >
+                        <label for="txtImagenUrl">Imagen</label>
+                    </div>
+                     <div class="input-field col l4 s12">
+                        <input  id="txtEstatus" type="number" name="estatus" >
+                        <label for="txtEstatus">Estatus</label>
+                    </div>
+
+  
                     <div class="input-field col l4 s12">   
                         <jsp:include page="/Views/Tipo/select.jsp">                           
                             <jsp:param name="id" value="0" />  
@@ -68,14 +70,13 @@
                     </div>
                     
                    
-                   
                     
+                                      
                     <div class="input-field col l4 s12">   
                         <jsp:include page="/Views/Shared/selectTop.jsp">
                             <jsp:param name="top_aux" value="<%=top_aux%>" />                        
                         </jsp:include>                        
                     </div> 
-                    
                 </div>
                 <div class="row">
                     <div class="col l12 s12">
@@ -93,10 +94,8 @@
                                 <tr>                                     
                                     <th>Raza</th>  
                                     <th>Nombre</th> 
-                                    
-                                    <th>Estatus</th>  
-                                    <th>Tipo</th>
-                                    <<th>Genero</th>
+                                    <th>ImagenUrl</th>  
+                                    <th>Estatus</th>       
                                     <th>Acciones</th>
                                 </tr>
                             </thead>                       
@@ -109,14 +108,14 @@
                                             tempNumPage = (int) Math.ceil(divTempNumPage);
                                         }
                                 %>
-                                <tr data-page="<%= tempNumPage%>"> 
-                                    <td><%=mascota.getRaza()%></td> 
-                                    <td><%=mascota.getNombre()%></td>  
-                                    
-                                     <td><%=mascota.getEstatus()%></td>  
+                                <tr data-page="<%= tempNumPage%>">                                    
+                                    <td><%=mascota.getRaza()%></td>  
+                                    <td><%=mascota.getNombre()%></td>
+                                    <td><%=mascota.getImagenUrl()%></td>  
+                                    <td><%=mascota.getEstatus()%></td>                
                                     <td><%=mascota.getTipo().getNombre()%></td>  
                                     <td><%=mascota.getGenero().getNombre()%></td>
-                                   
+                                    
                                     <td>
                                         <div style="display:flex">
                                              <a href="Mascota?accion=edit&id=<%=mascota.getId()%>" title="Modificar" class="waves-effect waves-light btn green">
