@@ -11,7 +11,7 @@ public class GeneroDAL {
     }
     private static String obtenerSelect(Genero pGenero) {
         String sql;
-        sql = "SELECT"; 
+        sql = "SELECT "; 
         if (pGenero.getTop_aux() > 0 && ComunDB.TIPODB == ComunDB.TipoDB.SQLSERVER) {            
             sql += "TOP " + pGenero.getTop_aux() + " ";
         }

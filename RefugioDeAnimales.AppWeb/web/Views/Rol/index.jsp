@@ -1,4 +1,4 @@
-%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="refugiodeanimales.entidadesdenegocio.Rol"%>
 <%@page import="java.util.ArrayList"%>
 
