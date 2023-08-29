@@ -276,7 +276,7 @@ public class MascotaDAL {
         return mascotas;
     }
     
-    public static ArrayList<Mascota> buscarIncluirIdRelaciones(Mascota pMascota) throws Exception {
+    public static ArrayList<Mascota> buscarIncluirRelaciones(Mascota pMascota) throws Exception {
         ArrayList<Mascota> mascotas = new ArrayList();
         try (Connection conn = ComunDB.obtenerConexion();) {
             String sql = "SELECT ";
@@ -284,13 +284,13 @@ public class MascotaDAL {
                 sql += "TOP " + pMascota.getTop_aux() + " "; 
             }
             sql += obtenerCampos();
-            sql += ",";
+            sql += ", ";
             sql += TipoDAL.obtenerCampos();
-            sql += ",";
+            sql += ", ";
             sql += GeneroDAL.obtenerCampos();
-            sql += "FROM Mascota m";
-            sql += "INNER JOIN Tipo t on(m.IdTipo = t.Id)";
-            sql += "INNER JOIN Genero g on(m.IdGenero = g.Id)";
+            sql += " FROM Mascota m";
+            sql += " INNER JOIN Tipo t on (m.IdTipo = t.Id)";
+            sql += " INNER JOIN Genero g on (m.IdGenero = g.Id)";
             ComunDB comundb = new ComunDB();
             ComunDB.utilQuery utilQuery = comundb.new utilQuery(sql, null, 0);
             querySelect(pMascota, utilQuery);
@@ -311,9 +311,5 @@ public class MascotaDAL {
             throw ex;
         }
         return mascotas;
-    }
-
-    public static ArrayList<Mascota> buscarIncluirRelaciones(Mascota mascota) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
