@@ -6,10 +6,10 @@
 <% ArrayList<Tipo> tipos = TipoDAL.obtenerTodos();
     int id = Integer.parseInt(request.getParameter("id"));
 %>
-<select id="slTipo" name="idContacto">
+<select id="slTipo" name="idTipo">
     <option <%=(id == 0) ? "selected" : ""%>  value="0">SELECCIONAR</option>
     <% for (Tipo tipo : tipos) {%>
         <option <%=(id == tipo.getId()) ? "selected" : "" %>  value="<%=tipo.getId()%>"><%= tipo.getNombre()%></option>
     <%}%>
 </select>
-<label for="idContacto">Tipo</label>
+<label for="idTipo">Tipo</label>

@@ -7,7 +7,7 @@ import refugiodeanimales.entidadesdenegocio.*;
 public class MascotaDAL {
     
     static String obtenerCampos() {
-        return "m.Id, m.IdTipo, m.IdGenero, m.Raza, m.Nombre, m.ImagenUrl, m.Estatus";
+        return "m.Id, m.IdTipo, m.IdGenero, m.Raza, m.Nombre, m.ImagenURL, m.Estatus";
     }
     
     private static String obtenerSelect(Mascota pMascota) {
