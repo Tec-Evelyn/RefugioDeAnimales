@@ -83,8 +83,7 @@
                             <thead>
                                 <tr>                                     
                                     <th>Raza</th>  
-                                    <th>Nombre</th> 
-                                    
+                                    <th>Nombre</th>                            
                                     <th>Tipo</th>
                                     <th>Género</th>
                                     <th>Acciones</th>

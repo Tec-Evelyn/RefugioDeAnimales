@@ -145,7 +145,7 @@ public class MascotaDAL {
                 
                 if (generoMap.containsKey(mascota.getIdGenero()) == false) {
                     Genero genero = new Genero();
-                    GeneroDAL.asignarDatosResultSet(genero, resultSet, index);
+                    GeneroDAL.asignarDatosResultSet(genero, resultSet, index+2);
                     generoMap.put(genero.getId(), genero); 
                     mascota.setGenero(genero); 
                 } else {

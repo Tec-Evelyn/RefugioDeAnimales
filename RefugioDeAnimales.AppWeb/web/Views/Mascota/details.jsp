@@ -14,6 +14,7 @@
             <h5>Detalle de Mascota</h5>
              <div class="row">
                 <div class="row">
+                   <img src="<%=mascota.getImagenurl()%>" alt="">
                     <div class="input-field col l4 s12">
                         <input  id="txtRaza" type="text" value="<%=mascota.getRaza()%>" disabled>
                         <label for="txtRaza">Raza</label>
