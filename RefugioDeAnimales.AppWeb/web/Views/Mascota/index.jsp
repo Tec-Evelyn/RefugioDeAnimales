@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="controlproductos.entidadesdenegocio.*"%>
+<%@page import="refugiodeanimales.entidadesdenegocio.*"%>
 <%@page import="java.util.ArrayList"%>
 
 <% ArrayList<Mascota> mascotas = (ArrayList<Mascota>) request.getAttribute("mascotas");
@@ -38,21 +38,11 @@
                     </div>     
                     
                       <div class="input-field col l4 s12">
-                        <input  id="txtRaza" type="number" name="raza" >
-                        <label for="txtRaza"></label>
-                    </div>
-                     <div class="input-field col l4 s12">
-                        <input  id="txtNombre" type="number" name="nombre" >
-                        <label for="txtNombre">Nombre</label>
-                    </div>
-                      <div class="input-field col l4 s12">
-                        <input  id="txtImagenUrl" name="imagenurl" >
-                        <label for="txtImagenUrl">Imagen</label>
-                    </div>
-                     <div class="input-field col l4 s12">
-                        <input  id="txtEstatus" type="number" name="estatus" >
-                        <label for="txtEstatus">Estatus</label>
-                    </div>
+                        <input  id="txtRaza" type="text" name="raza" >
+                        <label for="txtRaza">Raza</label>
+                    </div>                   
+                                          
+                     
 
   
                     <div class="input-field col l4 s12">   
@@ -94,8 +84,9 @@
                                 <tr>                                     
                                     <th>Raza</th>  
                                     <th>Nombre</th> 
-                                    <th>ImagenUrl</th>  
-                                    <th>Estatus</th>       
+                                    
+                                    <th>Tipo</th>
+                                    <th>Género</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>                       
@@ -111,11 +102,9 @@
                                 <tr data-page="<%= tempNumPage%>">                                    
                                     <td><%=mascota.getRaza()%></td>  
                                     <td><%=mascota.getNombre()%></td>
-                                    <td><%=mascota.getImagenUrl()%></td>  
-                                    <td><%=mascota.getEstatus()%></td>                
-                                    <td><%=mascota.getTipo().getNombre()%></td>  
-                                    <td><%=mascota.getGenero().getNombre()%></td>
                                     
+                                    <td><%=mascota.getTipo().getNombre()%></td>
+                                    <td><%=mascota.getGenero().getNombre()%></td>
                                     <td>
                                         <div style="display:flex">
                                              <a href="Mascota?accion=edit&id=<%=mascota.getId()%>" title="Modificar" class="waves-effect waves-light btn green">

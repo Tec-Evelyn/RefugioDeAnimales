@@ -93,7 +93,7 @@ public class MascotaServlet extends HttpServlet {
                 Tipo tipo = new Tipo();
                 tipo.setId(mascota_result.getIdTipo());
                 mascota_result.setTipo(TipoDAL.obtenerPorId(tipo));
-                request.setAttribute("mascota", mascota_result);
+               
                 Genero genero = new Genero();
                 genero.setId(mascota_result.getIdGenero());
                 mascota_result.setGenero(GeneroDAL.obtenerPorId(genero));

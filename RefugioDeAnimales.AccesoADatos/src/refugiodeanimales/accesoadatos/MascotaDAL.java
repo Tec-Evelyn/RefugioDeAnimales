@@ -32,7 +32,7 @@ public class MascotaDAL {
         int result;
         String sql;
         try (Connection conn = ComunDB.obtenerConexion();) { 
-            sql = "INSERT INTO Mascota(IdTipo, IdGenero, Raza, Nombre, ImagenUrl, Estatus) VALUES(?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO Mascota(IdTipo, IdGenero, Raza, Nombre, ImagenURL, Estatus) VALUES(?, ?, ?, ?, ?, ?)";
             try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                 ps.setInt(1, pMascota.getIdTipo());
                 ps.setInt(2, pMascota.getIdGenero());
@@ -56,7 +56,7 @@ public class MascotaDAL {
         int result;
         String sql;
         try (Connection conn = ComunDB.obtenerConexion();) {
-            sql = "UPDATE Mascota SET IdTipo=?, IdGenero = ?, Raza = ?, Nombre = ?, ImagenUrl = ?, Estatus = ?, WHERE Id=?";
+            sql = "UPDATE Mascota SET IdTipo=?, IdGenero=?, Raza=?, Nombre=?, ImagenURL=?, Estatus=? WHERE Id=?";
             try (PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);) {
                 ps.setInt(1, pMascota.getIdTipo());
                 ps.setInt(2, pMascota.getIdGenero());
@@ -178,7 +178,7 @@ public class MascotaDAL {
         catch (SQLException ex) {
             throw ex;
         }
-        if (mascotas.size() > 0) {
+        if (!mascotas.isEmpty()) {
             mascota = mascotas.get(0);
         }
         return mascota;
@@ -238,7 +238,7 @@ public class MascotaDAL {
          if (pMascota.getImagenurl() != null && pMascota.getImagenurl().trim().isEmpty() == false) {
             pUtilQuery.AgregarNumWhere(" m.ImagenUrl LIKE ? ");
             if (statement != null) {
-                statement.setString(pUtilQuery.getNumWhere(), "%" + pMascota.getNombre() + "%");
+                statement.setString(pUtilQuery.getNumWhere(), "%" + pMascota.getImagenurl() + "%");
             }
         }
         if (pMascota.getEstatus() > 0) {

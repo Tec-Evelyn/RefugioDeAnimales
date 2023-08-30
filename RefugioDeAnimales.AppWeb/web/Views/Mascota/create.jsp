@@ -29,8 +29,8 @@
                     <div class="input-field col l4 s12">   
                         <select id="slEstatus" name="estatus" class="validate">
                             <option value="0">SELECCIONAR</option>
-                            <option value="<%=Mascota.EstatusMascota.ACTIVO%>">ACTIVO</option>
-                            <option value="<%=Mascota.EstatusMascota.INACTIVO%>">INACTIVO</option>
+                            <option value="<%=Mascota.EstatusMascota.ACTIVO%>">DISPONBLE</option>
+                            <option value="<%=Mascota.EstatusMascota.INACTIVO%>">INDISPONIBLE</option>
                         </select>       
                         <label for="slEstatus">Estatus</label>
                         <span id="slEstatus_error" style="color:red" class="helper-text"></span>

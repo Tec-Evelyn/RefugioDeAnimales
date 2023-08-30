@@ -23,7 +23,7 @@
                         <label for="txtNombre">Nombre</label>
                     </div> 
                     <div class="input-field col l4 s12">
-                        <input  id="txtImagenUrl" type="text" value="<%=mascota.getImagenUrl()%>" disabled>
+                        <input  id="txtImagenUrl" type="text" value="<%=mascota.getImagenurl()%>" disabled>
                         <label for="txtImagenUrl">ImagenUrl</label>
                     </div>      
                     <div class="input-field col l4 s12">   
