@@ -9,7 +9,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
   
 
 body{
-    background-color: aquamarine;
+    background-color: white;
 }
 table{
     background-color: white;
@@ -18,7 +18,7 @@ table{
 thead{
     background-color: black ;
     color: white ;
-    border-bottom: solid 12px aquamarine; 
+    border-bottom: solid 12px white; 
 }
 /*tr:nth-child(even){
     background-color: white;
@@ -34,8 +34,9 @@ tr:hover td{
 
 
 /*DISEÑO DEL LOGIN*/
+
  /*body{
-    /*display: flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     min-height:100vh;
@@ -44,13 +45,29 @@ tr:hover td{
     background-size: cover;
     background-position: center;
     background-color: #23242a;
+}*/
+ 
+ 
+
+h5{
+    display: flex;
+    justify-content:center;
+    color: black;
+    font-size: xx-large;
+    font-weight: 500;
 }
+span{
+    color: black;
+    font-weight: 500;
+}
+
+
 .box{
-    background: skyblue;
     width: 380px;
-     min-height:412px;
-    background:  #23242a;
-     color: white;
+    height:450px;
+    background: white ;
+    /*#23242a*/
+     /*color: white;*/
     top: 50%;
     left: 50%;
     position: absolute;
@@ -59,8 +76,10 @@ tr:hover td{
     padding: 70px 30px;
     border-radius: 10px;  
     overflow: hidden;
+    box-shadow: 0 10px 25px rgba(92, 99, 105,.9);
+    
 }
-
+/*
 h5{
      margin: 0;
     padding: 0;
@@ -124,17 +143,11 @@ h5{
 
 }
 
-.row input{
-    color: white;
-}
+
 
 h1{
     display: flex;
     justify-content: center;
     color:white;
 }
-h5{
-    display: flex;
-    justify-content:center;
-    color: white;
-}*/
+*/

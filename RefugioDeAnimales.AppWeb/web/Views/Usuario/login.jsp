@@ -12,7 +12,7 @@
         <jsp:include page="/Views/Shared/headerBody.jsp" />  
         <main class="container">
              <div class="box">
-            <h5>Login</h5>
+        <h5>Iniciar Sesión</h5>
         
             <form action="Usuario?accion=login" method="post">
                 <input type="hidden" name="accion" value="<%=request.getAttribute("accion")%>">                
