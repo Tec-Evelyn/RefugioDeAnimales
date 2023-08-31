@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col l12 s12">
                     <h1>¡Bienvenidos</h1> 
-                    <span>Al sistema de Refugio de Animales!</span> 
+                    <h5>Al sistema de Refugio de Animales!</h5  > 
                 </div>
             </div>            
         </main>

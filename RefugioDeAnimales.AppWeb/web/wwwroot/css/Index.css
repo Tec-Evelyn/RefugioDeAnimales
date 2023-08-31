@@ -6,12 +6,135 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     Created on : 30 ago 2023, 10:26:33
     Author     : Evelyn Liquez
 */
+  
 
 body{
     background-color: aquamarine;
 }
+table{
+    background-color: white;
+}
 
 thead{
     background-color: black ;
+    color: white ;
+    border-bottom: solid 12px aquamarine; 
+}
+/*tr:nth-child(even){
+    background-color: white;
+ 
+}*/
+tr:hover td{
+    background-color: #ddd;/*#369681;*/
+    color: black; 
+    font-size: x-large;
+    cursor: pointer;
+    /*font-size: large;*/
 }
 
+
+/*DISEÑO DEL LOGIN*/
+ /*body{
+    /*display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height:100vh;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-position: center;
+    background-color: #23242a;
+}
+.box{
+    background: skyblue;
+    width: 380px;
+     min-height:412px;
+    background:  #23242a;
+     color: white;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+    border-radius: 10px;  
+    overflow: hidden;
+}
+
+h5{
+     margin: 0;
+    padding: 0;
+    text-align: center;
+    font-size: 22px;
+    position: relative;
+    letter-spacing: 0.1em;
+}
+
+
+
+
+
+ .box form{
+    position: absolute;
+    inset: 6px;
+    background: black;
+    padding: 50px 40px;
+    border-radius: 8px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+}
+.box::before{
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 380px;
+    height: 420px;
+    background: linear-gradient(0deg, transparent, 
+    transparent, blue, blue,blue, blue);
+    z-index: 1;
+    
+    transform-origin: bottom right;
+    animation: animate 6s linear infinite;
+}
+
+.box::after{
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 380px;
+    height: 420px;
+    background: linear-gradient(0deg, transparent, 
+    transparent,blue, blue, blue, blue);
+    z-index: 1;
+    transform-origin: bottom right;
+    animation: animate 6s linear infinite;
+    animation-delay: -3s;
+}
+
+@keyframes animate{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+
+}
+
+.row input{
+    color: white;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+    color:white;
+}
+h5{
+    display: flex;
+    justify-content:center;
+    color: white;
+}*/

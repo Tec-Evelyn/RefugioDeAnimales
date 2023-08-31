@@ -8,23 +8,26 @@
 
     </head>
     <body>
+       
         <jsp:include page="/Views/Shared/headerBody.jsp" />  
-        <main class="container">   
+        <main class="container">
+             <div class="box">
             <h5>Login</h5>
+        
             <form action="Usuario?accion=login" method="post">
                 <input type="hidden" name="accion" value="<%=request.getAttribute("accion")%>">                
                 <div class="row">
                     <div class="input-field col l5 s12">                                             
                         <i class="material-icons prefix">account_circle</i>
                         <input  id="txtLogin" type="text" name="login" required class="validate" maxlength="25">  
-                        <label for="txtLogin">Login</label>
+                        <span for="txtLogin">Login</span>
                     </div>                                       
                 </div>
                 <div class="row">
-                    <div class="input-field col l5 s12">                                             
+                    <div class="input-field col l5 s12" >                                             
                         <i class="material-icons prefix">enhanced_encryption</i>
                         <input  id="txtPassword" type="password" name="password" required class="validate" minlength="5" maxlength="32">  
-                        <label for="txtPassword">Password</label>
+                        <span for="txtPassword">Password</span>
                     </div>                                       
                 </div>
                 <div class="row">
@@ -39,7 +42,8 @@
                     </div>
                 </div>
                 <%}%>
-            </form>          
+            </form> 
+        </div>    
         </main>
         <jsp:include page="/Views/Shared/footerBody.jsp" />      
     </body>
