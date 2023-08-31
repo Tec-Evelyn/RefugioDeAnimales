@@ -236,7 +236,7 @@ public class MascotaDAL {
             }
         }
          if (pMascota.getImagenurl() != null && pMascota.getImagenurl().trim().isEmpty() == false) {
-            pUtilQuery.AgregarNumWhere(" m.ImagenUrl LIKE ? ");
+            pUtilQuery.AgregarNumWhere(" m.ImagenURL LIKE ? ");
             if (statement != null) {
                 statement.setString(pUtilQuery.getNumWhere(), "%" + pMascota.getImagenurl() + "%");
             }

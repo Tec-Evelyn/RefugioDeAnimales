@@ -27,7 +27,7 @@ public class MascotaServlet extends HttpServlet {
         }
         mascota.setRaza(Utilidad.getParameter(request, "raza", ""));
         mascota.setNombre(Utilidad.getParameter(request, "nombre", ""));
-        mascota.setImagenurl(Utilidad.getParameter(request, "imagenurl", ""));
+        mascota.setImagenurl(Utilidad.getParameter(request, "imagenURL", ""));
         mascota.setIdTipo(Integer.parseInt(Utilidad.getParameter(request, "idTipo", "0")));
         mascota.setIdGenero(Integer.parseInt(Utilidad.getParameter(request, "idGenero", "0")));
         mascota.setEstatus(Byte.parseByte(Utilidad.getParameter(request, "estatus", "0")));

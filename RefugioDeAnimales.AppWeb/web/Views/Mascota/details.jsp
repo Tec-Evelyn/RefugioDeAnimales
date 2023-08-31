@@ -23,10 +23,7 @@
                         <input  id="txtNombre" type="text" value="<%=mascota.getNombre()%>" disabled>
                         <label for="txtNombre">Nombre</label>
                     </div> 
-                    <div class="input-field col l4 s12">
-                        <input  id="txtImagenUrl" type="text" value="<%=mascota.getImagenurl()%>" disabled>
-                        <label for="txtImagenUrl">ImagenUrl</label>
-                    </div>      
+      
                     <div class="input-field col l4 s12">   
                         <select id="slEstatus" name="estatus" disabled>
                             <option value="0" <%=(mascota.getEstatus() == 10) ? "selected" : ""%>>SELECCIONAR</option>

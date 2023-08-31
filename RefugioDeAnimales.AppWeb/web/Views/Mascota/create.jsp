@@ -23,7 +23,7 @@
                         <label for="txtNombre">Nombre</label>
                     </div> 
                     <div class="input-field col l4 s12">
-                        <input  id="txtImagenUrl" type="text" name="imagenurl" required class="validate" maxlength="25">
+                        <input  id="txtImagenUrl" type="text" name="imagenurl" required class="validate" maxlength="300">
                         <label for="txtImagenUrl">ImagenUrl</label>
                     </div> 
                     <div class="input-field col l4 s12">   
