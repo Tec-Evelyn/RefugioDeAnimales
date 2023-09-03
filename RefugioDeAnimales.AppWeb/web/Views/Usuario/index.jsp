@@ -29,7 +29,7 @@
     <body>
         <jsp:include page="/Views/Shared/headerBody.jsp" />  
         <main class="container">   
-            <h5>Buscar Usuario</h5>
+            <h5>Usuario</h5>
             <form action="Usuario" method="post">
                 <input type="hidden" name="accion" value="<%=request.getAttribute("accion")%>"> 
                 <div class="row">
@@ -49,7 +49,7 @@
                         <input  id="txtTelefono" type="text" name="telefono">
                         <label for="txtTelefono">Telefono</label>
                     </div>
-                    <div class="input-field col l4 s12">
+                    <!--<div class="input-field col l4 s12">
                         <input  id="txtDireccion" type="text" name="direccion">
                         <label for="txtDireccion">Direccion</label>
                     </div>                    
@@ -60,7 +60,7 @@
                             <option value="<%=Usuario.EstatusUsuario.INACTIVO%>">INACTIVO</option>
                         </select>       
                         <label for="slEstatus">Estatus</label>
-                    </div>
+                    </div>-->
                     <div class="input-field col l4 s12">   
                         <jsp:include page="/Views/Rol/select.jsp">                           
                             <jsp:param name="id" value="0" />  
@@ -75,7 +75,7 @@
                 <div class="row">
                     <div class="col l12 s12">
                         <button type="sutmit" class="waves-effect waves-light btn blue"><i class="material-icons right">search</i>Buscar</button>
-                        <a href="Usuario?accion=create" class="waves-effect waves-light btn blue"><i class="material-icons right">add</i>Crear</a>                          
+                        <a href="Usuario?accion=create" class="waves-effect waves-light btn grey"><i class="material-icons right">add</i>Crear</a>                          
                     </div>
                 </div>
             </form>
@@ -126,7 +126,7 @@
                                     <td><%=usuario.getRol().getNombre()%></td>  
                                     <td>
                                         <div style="display:flex">
-                                             <a href="Usuario?accion=edit&id=<%=usuario.getId()%>" title="Modificar" class="waves-effect waves-light btn green">
+                                             <a href="Usuario?accion=edit&id=<%=usuario.getId()%>" title="Modificar" class="waves-effect waves-light btn yellow">
                                             <i class="material-icons">edit</i>
                                         </a>
                                         <a href="Usuario?accion=details&id=<%=usuario.getId()%>" title="Ver" class="waves-effect waves-light btn blue">

@@ -48,8 +48,8 @@
                 </div>
                 <div class="row">
                     <div class="col l12 s12">
-                        <button type="sutmit" class="waves-effect waves-light btn blue"><i class="material-icons right">delete</i>Eliminar</button>
-                        <a href="Mascota" class="waves-effect waves-light btn blue"><i class="material-icons right">list</i>Cancelar</a>                          
+                        <button type="sutmit" class="waves-effect waves-light btn red"><i class="material-icons right">delete</i>Eliminar</button>
+                        <a href="Mascota" class="waves-effect waves-light btn grey"><i class="material-icons right">list</i>Cancelar</a>                          
                     </div>
                 </div>
             </form>          

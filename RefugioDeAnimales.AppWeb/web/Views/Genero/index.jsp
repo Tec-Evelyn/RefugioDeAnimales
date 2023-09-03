@@ -29,7 +29,7 @@
     <body>
         <jsp:include page="/Views/Shared/headerBody.jsp" />  
         <main class="container">   
-            <h5>Buscar Género</h5>
+            <h5>Género</h5>
             <form action="Genero" method="post">
                 <input type="hidden" name="accion" value="<%=request.getAttribute("accion")%>"> 
                 <div class="row">
@@ -44,7 +44,7 @@
                 <div class="row">
                     <div class="col l12 s12">
                         <button type="sutmit" class="waves-effect waves-light btn blue"><i class="material-icons right">search</i>Buscar</button>
-                        <a href="Genero?accion=create" class="waves-effect waves-light btn blue"><i class="material-icons right">add</i>Crear</a>                          
+                        <a href="Genero?accion=create" class="waves-effect waves-light btn grey"><i class="material-icons right">add</i>Crear</a>                          
                     </div>
                 </div>
             </form>
@@ -72,7 +72,7 @@
                                     <td><%=genero.getNombre()%></td>                                       
                                     <td>
                                         <div style="display:flex">
-                                            <a href="Genero?accion=edit&id=<%=genero.getId()%>" title="Modificar" class="waves-effect waves-light btn green">
+                                            <a href="Genero?accion=edit&id=<%=genero.getId()%>" title="Modificar" class="waves-effect waves-light btn yellow">
                                                 <i class="material-icons">edit</i>
                                             </a>
                                             <a href="Genero?accion=details&id=<%=genero.getId()%>" title="Ver" class="waves-effect waves-light btn blue">

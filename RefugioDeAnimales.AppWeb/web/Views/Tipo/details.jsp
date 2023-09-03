@@ -23,8 +23,8 @@
                     
             <div class="row">
                 <div class="col l12 s12">
-                    <a href="Tipo?accion=edit&id=<%=tipo.getId()%>" class="waves-effect waves-light btn blue"><i class="material-icons right">edit</i>Ir modificar</a>                        
-                    <a href="Tipo" class="waves-effect waves-light btn blue"><i class="material-icons right">cancel</i>Cancelar</a>                          
+                    <a href="Tipo?accion=edit&id=<%=tipo.getId()%>" class="waves-effect waves-light btn yellow"><i class="material-icons right">edit</i>Ir modificar</a>                        
+                    <a href="Tipo" class="waves-effect waves-light btn grey"><i class="material-icons right">cancel</i>Cancelar</a>                          
                 </div>
             </div>  
                     
