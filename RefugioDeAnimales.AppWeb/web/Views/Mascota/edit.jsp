@@ -32,8 +32,8 @@
                     <div class="input-field col l4 s12">   
                         <select id="slEstatus" name="estatus" class="validate">
                             <option value="0" <%=(mascota.getEstatus() == 10) ? "selected" : ""%>>SELECCIONAR</option>
-                            <option value="<%=Mascota.EstatusMascota.ACTIVO%>"  <%=(mascota.getEstatus() == Mascota.EstatusMascota.ACTIVO) ? "selected" : ""%>>ACTIVO</option>
-                            <option value="<%=Mascota.EstatusMascota.INACTIVO%>"  <%=(mascota.getEstatus() == Mascota.EstatusMascota.INACTIVO) ? "selected" : ""%>>INACTIVO</option>
+                            <option value="<%=Mascota.EstatusMascota.ACTIVO%>"  <%=(mascota.getEstatus() == Mascota.EstatusMascota.ACTIVO) ? "selected" : ""%>>DISPONIBLE</option>
+                            <option value="<%=Mascota.EstatusMascota.INACTIVO%>"  <%=(mascota.getEstatus() == Mascota.EstatusMascota.INACTIVO) ? "selected" : ""%>>NO DISPONIBLE</option>
                         </select>       
                         <label for="slEstatus">Estatus</label>
                         <span id="slEstatus_error" style="color:red" class="helper-text"></span>
@@ -55,8 +55,8 @@
 
                 <div class="row">
                     <div class="col l12 s12">
-                        <button type="sutmit" class="waves-effect waves-light btn blue"><i class="material-icons right">save</i>Guardar</button>
-                        <a href="Mascota" class="waves-effect waves-light btn blue"><i class="material-icons right">list</i>Cancelar</a>                          
+                        <button type="sutmit" class="waves-effect waves-light btn green"><i class="material-icons right">save</i>Guardar</button>
+                        <a href="Mascota" class="waves-effect waves-light btn grey"><i class="material-icons right">list</i>Cancelar</a>                          
                     </div>
                 </div>
             </form>          

@@ -46,7 +46,7 @@
                 <div class="row">
                     <div class="col l12 s12">
                         <button type="sutmit" class="waves-effect waves-light btn blue"><i class="material-icons right">search</i>Buscar</button>
-                        <a href="Tipo?accion=create" class="waves-effect waves-light btn blue"><i class="material-icons right">add</i>Crear</a>                          
+                        <a href="Tipo?accion=create" class="waves-effect waves-light btn grey"><i class="material-icons right">add</i>Crear</a>                          
                     </div>
                 </div>
             </form>
@@ -76,7 +76,7 @@
                                     
                                     <td>
                                         <div style="display:flex">
-                                            <a href="Tipo?accion=edit&id=<%=tipo.getId()%>" title="Modificar" class="waves-effect waves-light btn green">
+                                            <a href="Tipo?accion=edit&id=<%=tipo.getId()%>" title="Modificar" class="waves-effect waves-light btn yellow">
                                                 <i class="material-icons">edit</i>
                                             </a>
                                             <a href="Tipo?accion=details&id=<%=tipo.getId()%>" title="Ver" class="waves-effect waves-light btn blue">

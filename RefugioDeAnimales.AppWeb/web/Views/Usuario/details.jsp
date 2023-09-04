@@ -49,8 +49,8 @@
 
                 <div class="row">
                     <div class="col l12 s12">
-                         <a href="Usuario?accion=edit&id=<%=usuario.getId()%>" class="waves-effect waves-light btn blue"><i class="material-icons right">edit</i>Ir modificar</a>            
-                        <a href="Usuario" class="waves-effect waves-light btn blue"><i class="material-icons right">list</i>Cancelar</a>                          
+                         <a href="Usuario?accion=edit&id=<%=usuario.getId()%>" class="waves-effect waves-light btn yellow"><i class="material-icons right">edit</i>Ir modificar</a>            
+                        <a href="Usuario" class="waves-effect waves-light btn grey"><i class="material-icons right">list</i>Cancelar</a>                          
                     </div>
                 </div>          
         </main>

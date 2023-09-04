@@ -28,7 +28,7 @@
     <body>
         <jsp:include page="/Views/Shared/headerBody.jsp" />  
         <main class="container">   
-            <h5>Buscar Mascota</h5>
+            <h5>Mascota</h5>
             <form action="Mascota" method="post">
                 <input type="hidden" name="accion" value="<%=request.getAttribute("accion")%>"> 
                 <div class="row">
@@ -71,7 +71,7 @@
                 <div class="row">
                     <div class="col l12 s12">
                         <button type="sutmit" class="waves-effect waves-light btn blue"><i class="material-icons right">search</i>Buscar</button>
-                        <a href="Mascota?accion=create" class="waves-effect waves-light btn blue"><i class="material-icons right">add</i>Crear</a>                          
+                        <a href="Mascota?accion=create" class="waves-effect waves-light btn grey"><i class="material-icons right">add</i>Crear</a>                          
                     </div>
                 </div>
             </form>
@@ -106,7 +106,7 @@
                                     <td><%=mascota.getGenero().getNombre()%></td>
                                     <td>
                                         <div style="display:flex">
-                                             <a href="Mascota?accion=edit&id=<%=mascota.getId()%>" title="Modificar" class="waves-effect waves-light btn green">
+                                             <a href="Mascota?accion=edit&id=<%=mascota.getId()%>" title="Modificar" class="waves-effect waves-light btn yellow">
                                             <i class="material-icons">edit</i>
                                         </a>
                                         <a href="Mascota?accion=details&id=<%=mascota.getId()%>" title="Ver" class="waves-effect waves-light btn blue">

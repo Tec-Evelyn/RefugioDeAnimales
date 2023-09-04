@@ -28,7 +28,7 @@
     <body>
         <jsp:include page="/Views/Shared/headerBody.jsp" />  
         <main class="container">   
-            <h5>Buscar Rol</h5>
+            <h5>Rol</h5>
             <form action="Rol" method="post">
                 <input type="hidden" name="accion" value="<%=request.getAttribute("accion")%>"> 
                 <div class="row">
@@ -45,7 +45,7 @@
                 <div class="row">
                     <div class="col l12 s12">
                         <button type="sutmit" class="waves-effect waves-light btn blue"><i class="material-icons right">search</i>Buscar</button>
-                        <a href="Rol?accion=create" class="waves-effect waves-light btn blue"><i class="material-icons right">add</i>Crear</a>                          
+                        <a href="Rol?accion=create" class="waves-effect waves-light btn grey"><i class="material-icons right">add</i>Crear</a>                          
                     </div>
                 </div>
             </form>
@@ -73,7 +73,7 @@
                                     <td><%=rol.getNombre()%></td>                                       
                                     <td>
                                         <div style="display:flex">
-                                            <a href="Rol?accion=edit&id=<%=rol.getId()%>" title="Modificar" class="waves-effect waves-light btn green">
+                                            <a href="Rol?accion=edit&id=<%=rol.getId()%>" title="Modificar" class="waves-effect waves-light btn yellow">
                                                 <i class="material-icons">edit</i>
                                             </a>
                                             <a href="Rol?accion=details&id=<%=rol.getId()%>" title="Ver" class="waves-effect waves-light btn blue">
