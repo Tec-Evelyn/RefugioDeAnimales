@@ -9,10 +9,10 @@ public class ComunDB {
     }
       static int TIPODB = TipoDB.SQLSERVER;
     
-    static String connectionUrlSqlServer = "jdbc:sqlserver://localhost;"
+    static String connectionUrlSqlServer = "jdbc:sqlserver://RefugioDeAnimales.mssql.somee.com;"
             + "database=RefugioDeAnimales;"
-            + "user=JavaLiquez;"
-            + "password=#19Eve23;"
+            + "user=Refugio_SQLLogin_1;"
+            + "password=m653o2s87o;"
             + "loginTimeout=30;encrypt=false;trustServerCertificate=false";
     
     public static Connection obtenerConexion() throws SQLException {
